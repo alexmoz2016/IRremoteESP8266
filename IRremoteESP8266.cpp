@@ -467,7 +467,7 @@ extern "C" {
 static ETSTimer timer;
 volatile irparams_t irparams;
 
-static void ICACHE_FLASH_ATTR read_timeout(void *arg) {
+static void ICACHE_RAM_ATTR read_timeout(void *arg) { //was ICACHE_FLASH_ATTR
     os_intr_lock();
     if (irparams.rawlen) {
 		irparams.rcvstate = STATE_STOP;
@@ -475,7 +475,7 @@ static void ICACHE_FLASH_ATTR read_timeout(void *arg) {
 	os_intr_unlock();
 }
 
-static void ICACHE_FLASH_ATTR gpio_intr(void *arg) {
+static void ICACHE_RAM_ATTR gpio_intr(void *arg) { //was ICACHE_FLASH_ATTR
     uint32_t gpio_status = GPIO_REG_READ(GPIO_STATUS_ADDRESS);
     GPIO_REG_WRITE(GPIO_STATUS_W1TC_ADDRESS, gpio_status);
 
